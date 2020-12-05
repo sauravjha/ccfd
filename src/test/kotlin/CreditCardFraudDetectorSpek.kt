@@ -59,7 +59,7 @@ object CreditCardFraudDetectorSpek : Spek({
                     ),
                     Scenario(
                         "Invalid amount entry in the 3rd column",
-                        File("$basePath/invalid-amout-entry-in-3rd-column.csv"),
+                        File("$basePath/invalid-amount-entry-in-3rd-column.csv"),
                         "$prefixMessage For input string: \"invalidAmount\""
                     )
 

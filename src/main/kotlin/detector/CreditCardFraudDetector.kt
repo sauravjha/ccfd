@@ -54,10 +54,10 @@ class CreditCardFraudDetector(
 
     fun isCardTransactionsFraud(transaction: List<Transaction>): Boolean {
         transaction.forEachIndexed { index, eachTransaction ->
-            val interestedWindow = transaction.drop(index).filter {
-                it.dataTime <= eachTransaction.dataTime.plusHours(numOfHr) }
-            //println("$index ->${interestedWindow.map { it.amount }.sum()} $interestedWindow")
-            if (interestedWindow.map { it.amount }.sum() >= priceThreshold) return true
+            transaction.drop(index).filter {
+                it.dataTime <= eachTransaction.dataTime.plusHours(numOfHr) }.map { it.amount }.sum().let {
+                if (it >= priceThreshold) return true
+            }
         }
         return false
     }
