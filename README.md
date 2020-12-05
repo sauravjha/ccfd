@@ -32,7 +32,7 @@ Second argument should be filename that exists.
 Check the lint
 ./gradlew ktlintCheck
 Fix the lint
-./gradlew formatKotlin
+./gradlew ktlintFormat
 ```
 :sparkles: Linting is taken care. :smiley:
 

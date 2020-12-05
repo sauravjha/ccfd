@@ -160,7 +160,7 @@ object CreditCardFraudDetectorSpek : Spek({
             }
 
             context("when the transaction is  fraud when total amount is more then 150") {
-                //println("*******13**********")
+                // println("*******13**********")
                 val input = listOf(
                     Transaction("10d7ce2f43e35fa57d1bbf8b1e2", LocalDateTime.parse("2014-04-29T13:15:20"), 10.0),
                     Transaction("10d7ce2f43e35fa57d1bbf8b1e2", LocalDateTime.parse("2014-04-29T14:15:54"), 10.0),
@@ -188,7 +188,7 @@ object CreditCardFraudDetectorSpek : Spek({
             }
 
             context("when the transaction is fraud when first window exceed the limit") {
-                //println("*******first**********")
+                // println("*******first**********")
                 val input = listOf(
                     Transaction("10d7ce2f43e35fa57d1bbf8b1e2", LocalDateTime.parse("2014-04-29T13:15:20"), 150.0),
                     Transaction("10d7ce2f43e35fa57d1bbf8b1e2", LocalDateTime.parse("2014-04-29T14:15:54"), 10.0),
@@ -216,7 +216,7 @@ object CreditCardFraudDetectorSpek : Spek({
             }
 
             context("when the transaction is fraud when second window exceed the limit") {
-                //println("*******second**********")
+                // println("*******second**********")
                 val input = listOf(
                     Transaction("10d7ce2f43e35fa57d1bbf8b1e2", LocalDateTime.parse("2014-04-29T13:15:20"), 10.0),
                     Transaction("10d7ce2f43e35fa57d1bbf8b1e2", LocalDateTime.parse("2014-04-29T14:15:54"), 10.0),
@@ -245,7 +245,7 @@ object CreditCardFraudDetectorSpek : Spek({
             }
 
             context("when the transaction is fraud when last window for one transaction") {
-                //println("*******last**********")
+                // println("*******last**********")
                 val input = listOf(
                     Transaction("10d7ce2f43e35fa57d1bbf8b1e2", LocalDateTime.parse("2014-04-29T13:15:20"), 10.0),
                     Transaction("10d7ce2f43e35fa57d1bbf8b1e2", LocalDateTime.parse("2014-04-29T14:15:54"), 10.0),

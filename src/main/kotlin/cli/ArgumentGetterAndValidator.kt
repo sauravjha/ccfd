@@ -12,8 +12,10 @@ private val CSV_REGEX = "([a-zA-Z0-9/\\s_\\\\.\\-\\(\\):])+(.csv)\$".toRegex()
 class ArgumentGetterAndValidator : CliktCommand() {
     private val priceThreshold: Double by argument(help = "Enter the price threshold argument").double()
 
-    private val fileName by argument(help =
-    "Enter file with complete location( if the file exist in current dir just enter the name)")
+    private val fileName by argument(
+        help =
+            "Enter file with complete location( if the file exist in current dir just enter the name)"
+    )
         .file(mustExist = true).validate { require(CSV_REGEX.matches(it.toString())) { "File must be CSV file" } }
 
     override fun run() {

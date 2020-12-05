@@ -36,16 +36,22 @@ class CreditCardFraudDetector(
                 Transaction(it[0].trim(), LocalDateTime.parse(it[1].trim()), it[2].toDouble())
             }.toList()
         } catch (e: CSVFieldNumDifferentException) {
-            println("CSV file is in wrong format it should be(10d7ce2f43e35fa57d1bbf8b1e2, 2014-04-29T13:15:54, 10.00) \n" +
-                    "Error message: ${e.message}")
+            println(
+                "CSV file is in wrong format it should be(10d7ce2f43e35fa57d1bbf8b1e2, 2014-04-29T13:15:54, 10.00) \n" +
+                    "Error message: ${e.message}"
+            )
             throw InvalidCSVException("CSV file was invalid: ${e.message}")
         } catch (e: DateTimeParseException) {
-            println("Date format is wrong it should format year-month-dayThour:minute:second (e.g 2014-04-29T13:15:54)\n" +
-                    "Error message: ${e.message}")
+            println(
+                "Date format is wrong it should format year-month-dayThour:minute:second (e.g 2014-04-29T13:15:54)\n" +
+                    "Error message: ${e.message}"
+            )
             throw InvalidCSVException("CSV data is invalid: ${e.message}")
         } catch (e: NumberFormatException) {
-            println("Amount is in wrong format it should be dollars.cents(e.g 10.00)\n" +
-                    "Error message: ${e.message}")
+            println(
+                "Amount is in wrong format it should be dollars.cents(e.g 10.00)\n" +
+                    "Error message: ${e.message}"
+            )
             throw InvalidCSVException("CSV data is invalid: ${e.message}")
         }
         return transactions.groupBy { it.cardId }.toMap()
@@ -64,7 +70,8 @@ class CreditCardFraudDetector(
     fun isCardTransactionsFraud(transaction: List<Transaction>): Boolean {
         transaction.forEachIndexed { index, eachTransaction ->
             transaction.drop(index).filter {
-                it.dataTime <= eachTransaction.dataTime.plusHours(numOfHrSlidingWindow) }.map { it.amount }.sum().let {
+                it.dataTime <= eachTransaction.dataTime.plusHours(numOfHrSlidingWindow)
+            }.map { it.amount }.sum().let {
                 if (it >= priceThreshold) return true
             }
         }
