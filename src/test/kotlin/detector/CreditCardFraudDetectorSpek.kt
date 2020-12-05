@@ -18,8 +18,9 @@ data class Scenario(
 )
 
 object CreditCardFraudDetectorSpek : Spek({
+
     describe("creditCardDetector") {
-        context("readCSVFile") {
+        context("readCSVFile when the hashed credit card needed is 27") {
 
             context("when the valid sample file is passed") {
                 val valid = File("src/test/resources/valid-sample.csv")
@@ -61,8 +62,17 @@ object CreditCardFraudDetectorSpek : Spek({
                         "Invalid amount entry in the 3rd column",
                         File("$basePath/invalid-amount-entry-in-3rd-column.csv"),
                         "$prefixMessage invalidAmount is not is dollars.cents format"
+                    ),
+                    Scenario(
+                            "Invalid amount in 2nd column",
+                            File("$basePath/invalid-amount-format-2nd-column.csv"),
+                            "$prefixMessage 100.2 is not is dollars.cents format"
+                    ),
+                    Scenario(
+                            "Invalid hash card entry in 4th column",
+                            File("$basePath/invalid-hashed-credit-card-entry-in-4th-column.csv"),
+                            "$prefixMessage iaminvalid should of of size 27 and combination of digit and small alphabet"
                     )
-
                 ).forEach { (description, file, expectedErrorMessage) ->
                     it(description) {
                         assertThat({ CreditCardFraudDetector(150.0, file).readCSVFile() }, throws<InvalidCSVException>(withMessage(expectedErrorMessage)))

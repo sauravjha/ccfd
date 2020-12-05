@@ -4,6 +4,7 @@ import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import com.github.doyaaaaaken.kotlincsv.util.CSVFieldNumDifferentException
 import detector.exception.InvalidAmountFormat
 import detector.exception.InvalidCSVException
+import detector.exception.InvalidHashedFormat
 import mu.KotlinLogging
 import java.io.File
 import java.time.LocalDateTime
@@ -15,6 +16,7 @@ private val logger = KotlinLogging.logger {}
 class CreditCardFraudDetector(
     private val priceThreshold: Double,
     private val fileName: File,
+    private val hashedCreditCardNumberSize: Int = 27,
     private val numOfHrSlidingWindow: Long = 24
 ) {
     fun detect() {
@@ -36,7 +38,7 @@ class CreditCardFraudDetector(
         val transactions = try {
             csvReader().readAll(fileName).map {
                 Transaction(
-                    it[0].trim(),
+                    it[0].trim().isHashedStringValid(hashedCreditCardNumberSize),
                     LocalDateTime.parse(it[1].trim()),
                     it[2].trim().isAmountInValidFormat().toDouble()
                 )
@@ -50,6 +52,12 @@ class CreditCardFraudDetector(
         } catch (e: DateTimeParseException) {
             println(
                 "Date format is wrong it should format year-month-dayThour:minute:second (e.g 2014-04-29T13:15:54)\n" +
+                    "Error message: ${e.message}"
+            )
+            throw InvalidCSVException("CSV data is invalid: ${e.message}")
+        } catch (e: InvalidHashedFormat) {
+            println(
+                "Hashed Credit Card Number is Wrong format\n" +
                     "Error message: ${e.message}"
             )
             throw InvalidCSVException("CSV data is invalid: ${e.message}")
