@@ -60,6 +60,21 @@ test {
     useJUnitPlatform {
         includeEngines 'spek2'
     }
+    testLogging {
+        events "failed", "skipped", "standard_error", "standard_out"
+        showCauses true
+        showExceptions true
+        showStackTraces true
+    }
+    //ref: https://stackoverflow.com/questions/3963708/gradle-how-to-display-test-results-in-the-console-in-real-time
+    afterSuite { desc, result ->
+        if (!desc.parent)
+            println("${result.resultType} " +
+                    "(${result.testCount} tests, " +
+                    "${result.successfulTestCount} successes, " +
+                    "${result.failedTestCount} failures, " +
+                    "${result.skippedTestCount} skipped)")
+    }
 }
 
 // set JVM target to 1.8 for all compilation tasks
