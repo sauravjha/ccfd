@@ -10,7 +10,7 @@ import kotlin.system.exitProcess
 class CreditCardFraudDetector(
     private val priceThreshold: Double,
     private val fileName: File,
-    private val numOfHr: Long = 24
+    private val numOfHrSlidingWindow: Long = 24
 ) {
     fun detect() {
         val cardResult = try {
@@ -55,7 +55,7 @@ class CreditCardFraudDetector(
     fun isCardTransactionsFraud(transaction: List<Transaction>): Boolean {
         transaction.forEachIndexed { index, eachTransaction ->
             transaction.drop(index).filter {
-                it.dataTime <= eachTransaction.dataTime.plusHours(numOfHr) }.map { it.amount }.sum().let {
+                it.dataTime <= eachTransaction.dataTime.plusHours(numOfHrSlidingWindow) }.map { it.amount }.sum().let {
                 if (it >= priceThreshold) return true
             }
         }
