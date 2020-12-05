@@ -1,6 +1,5 @@
 
-
-fun main(): String {
-    return "Hello World"
+fun main(args: Array<String>) {
+    CreditCardFraudDetector().main(args)
 }
 

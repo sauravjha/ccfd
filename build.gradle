@@ -40,6 +40,8 @@ dependencies {
     implementation("com.vhl.blackmo:kotlin-grass-jvm:0.3.0")
 
     implementation 'io.github.microutils:kotlin-logging-jvm:2.0.2'
+
+    implementation("com.github.ajalt.clikt:clikt:3.0.1")
     
     testImplementation "io.mockk:mockk:1.10.2"
 
