@@ -21,3 +21,33 @@ Example:
 First argument should be Int or Double/Float.
 Second argument should be filename that exists.
 
+## How to run Test
+```$xslt
+./gradlew test 
+```
+
+## Code Quality Check task/script
+:star2: Kotlin
+```$xslt
+Check the lint
+./gradlew ktlintCheck
+Fix the lint
+./gradlew formatKotlin
+```
+:sparkles: Linting is taken care. :smiley:
+
+Static code analysis
+
+:dizzy: Detekt
+```$xslt
+./gradlew detekt
+```
+
+## References:
+1. [clikt - Used for Getting Comand Line Argument](https://ajalt.github.io/clikt/) 
+2. [kotlin-csv - Used for reading the CSV file](https://github.com/doyaaaaaken/kotlin-csv)
+2. [Spek - Used for running the test](https://www.spekframework.org/migration/)
+3. [Ktlint - Used for Checking and fixing the Linting issue](https://github.com/pinterest/ktlint)
+4. [detekt - Used for checking code quality](https://github.com/detekt/detekt)
+
+

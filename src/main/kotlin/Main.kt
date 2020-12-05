@@ -1,5 +1,5 @@
+import validation.ArgumentValidator
 
 fun main(args: Array<String>) {
-    CreditCardFraudDetector().main(args)
+    ArgumentValidator().main(args)
 }
-
