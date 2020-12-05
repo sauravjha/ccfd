@@ -14,7 +14,7 @@ fun String.isAmountInValidFormat(): String {
 
 fun String.isHashedStringValid(size: Int): String {
     val regex = "^([a-z0-9]{$size})\$".toRegex()
-    return when(regex.matches(this)) {
+    return when (regex.matches(this)) {
         true -> this
         false -> throw InvalidHashedFormat("$this should of of size $size and combination of digit and small alphabet")
     }

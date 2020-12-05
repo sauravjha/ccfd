@@ -64,14 +64,14 @@ object CreditCardFraudDetectorSpek : Spek({
                         "$prefixMessage invalidAmount is not is dollars.cents format"
                     ),
                     Scenario(
-                            "Invalid amount in 2nd column",
-                            File("$basePath/invalid-amount-format-2nd-column.csv"),
-                            "$prefixMessage 100.2 is not is dollars.cents format"
+                        "Invalid amount in 2nd column",
+                        File("$basePath/invalid-amount-format-2nd-column.csv"),
+                        "$prefixMessage 100.2 is not is dollars.cents format"
                     ),
                     Scenario(
-                            "Invalid hash card entry in 4th column",
-                            File("$basePath/invalid-hashed-credit-card-entry-in-4th-column.csv"),
-                            "$prefixMessage iaminvalid should of of size 27 and combination of digit and small alphabet"
+                        "Invalid hash card entry in 4th column",
+                        File("$basePath/invalid-hashed-credit-card-entry-in-4th-column.csv"),
+                        "$prefixMessage iaminvalid should of of size 27 and combination of digit and small alphabet"
                     )
                 ).forEach { (description, file, expectedErrorMessage) ->
                     it(description) {

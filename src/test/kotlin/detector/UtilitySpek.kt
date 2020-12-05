@@ -108,7 +108,6 @@ object UtilitySpek : Spek({
                     assertThat({ inputValueIsEmptySting.isHashedStringValid(size) }, throws<InvalidHashedFormat>(withMessage2("$inputValueIsEmptySting should of of size $size and combination of digit and small alphabet")))
                 }
             }
-
         }
         context("when the valid size is 32") {
             val size = 32
@@ -121,7 +120,6 @@ object UtilitySpek : Spek({
             }
         }
     }
-
 })
 private fun withMessage(message: String): Matcher<InvalidAmountFormat> = has(InvalidAmountFormat::message, equalTo(message))
 private fun withMessage2(message: String): Matcher<InvalidHashedFormat> = has(InvalidHashedFormat::message, equalTo(message))
