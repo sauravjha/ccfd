@@ -22,8 +22,8 @@ class CreditCardFraudDetector(
             exitProcess(0)
         }
         println("List of Fraud Card")
-        cardResult.filter { it.second }.forEach { (cardId, _) ->
-            println(cardId)
+        cardResult.filter { it.second }.forEach { (fraudCardId, _) ->
+            println(fraudCardId)
         }
     }
     @Suppress("ThrowsCount")

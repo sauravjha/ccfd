@@ -1,5 +1,5 @@
-import validation.ArgumentValidator
+import cli.ArgumentGetterAndValidator
 
 fun main(args: Array<String>) {
-    ArgumentValidator().main(args)
+    ArgumentGetterAndValidator().main(args)
 }

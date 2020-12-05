@@ -1,4 +1,4 @@
-package validation
+package cli
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
@@ -7,9 +7,9 @@ import com.github.ajalt.clikt.parameters.types.double
 import com.github.ajalt.clikt.parameters.types.file
 import detector.CreditCardFraudDetector
 
-val CSV_REGEX = "([a-zA-Z0-9/\\s_\\\\.\\-\\(\\):])+(.csv)\$".toRegex()
+private val CSV_REGEX = "([a-zA-Z0-9/\\s_\\\\.\\-\\(\\):])+(.csv)\$".toRegex()
 
-class ArgumentValidator : CliktCommand() {
+class ArgumentGetterAndValidator : CliktCommand() {
     private val priceThreshold: Double by argument(help = "Enter the price threshold argument").double()
 
     private val fileName by argument(help =
