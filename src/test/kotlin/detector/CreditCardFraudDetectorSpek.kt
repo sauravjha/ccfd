@@ -1,11 +1,11 @@
+package detector
+
 import com.natpryce.hamkrest.Matcher
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import com.natpryce.hamkrest.has
 import com.natpryce.hamkrest.throws
-import detector.CreditCardFraudDetector
-import detector.InvalidCSVException
-import detector.Transaction
+import detector.exception.InvalidCSVException
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import java.io.File
@@ -60,7 +60,7 @@ object CreditCardFraudDetectorSpek : Spek({
                     Scenario(
                         "Invalid amount entry in the 3rd column",
                         File("$basePath/invalid-amount-entry-in-3rd-column.csv"),
-                        "$prefixMessage For input string: \"invalidAmount\""
+                        "$prefixMessage invalidAmount is not is dollars.cents format"
                     )
 
                 ).forEach { (description, file, expectedErrorMessage) ->
@@ -277,4 +277,4 @@ object CreditCardFraudDetectorSpek : Spek({
     }
 })
 
-fun withMessage(message: String): Matcher<InvalidCSVException> = has(InvalidCSVException::message, equalTo(message))
+private fun withMessage(message: String): Matcher<InvalidCSVException> = has(InvalidCSVException::message, equalTo(message))

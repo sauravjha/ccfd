@@ -1,4 +1,4 @@
-package detector
+package detector.exception
 
 import java.lang.Exception
 

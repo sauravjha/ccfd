@@ -2,6 +2,8 @@ package detector
 
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import com.github.doyaaaaaken.kotlincsv.util.CSVFieldNumDifferentException
+import detector.exception.InvalidAmountFormat
+import detector.exception.InvalidCSVException
 import mu.KotlinLogging
 import java.io.File
 import java.time.LocalDateTime
@@ -33,7 +35,11 @@ class CreditCardFraudDetector(
     fun readCSVFile(): Map<String, List<Transaction>> {
         val transactions = try {
             csvReader().readAll(fileName).map {
-                Transaction(it[0].trim(), LocalDateTime.parse(it[1].trim()), it[2].toDouble())
+                Transaction(
+                    it[0].trim(),
+                    LocalDateTime.parse(it[1].trim()),
+                    it[2].trim().isAmountInValidFormat().toDouble()
+                )
             }.toList()
         } catch (e: CSVFieldNumDifferentException) {
             println(
@@ -48,6 +54,12 @@ class CreditCardFraudDetector(
             )
             throw InvalidCSVException("CSV data is invalid: ${e.message}")
         } catch (e: NumberFormatException) {
+            println(
+                "Amount is in wrong format it should be dollars.cents(e.g 10.00)\n" +
+                    "Error message: ${e.message}"
+            )
+            throw InvalidCSVException("CSV data is invalid: ${e.message}")
+        } catch (e: InvalidAmountFormat) {
             println(
                 "Amount is in wrong format it should be dollars.cents(e.g 10.00)\n" +
                     "Error message: ${e.message}"
