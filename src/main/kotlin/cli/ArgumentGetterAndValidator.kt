@@ -8,6 +8,7 @@ import com.github.ajalt.clikt.parameters.types.double
 import com.github.ajalt.clikt.parameters.types.file
 import com.github.ajalt.clikt.parameters.types.int
 import detector.CreditCardFraudDetector
+import detector.CsvFileReader
 
 private val CSV_REGEX = "([a-zA-Z0-9/\\s_\\\\.\\-\\(\\):])+(.csv)\$".toRegex()
 
@@ -22,6 +23,6 @@ class ArgumentGetterAndValidator : CliktCommand() {
     private val hashedCreditCardNumberSize by argument(help = "(OPTIONAL) Size of the hashed credit card number by (default is is 27.)").int().default(27)
 
     override fun run() {
-        CreditCardFraudDetector(priceThreshold, fileName, hashedCreditCardNumberSize).detect()
+        CreditCardFraudDetector(CsvFileReader(fileName, hashedCreditCardNumberSize), priceThreshold).detect()
     }
 }
