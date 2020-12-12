@@ -27,7 +27,7 @@ class CreditCardFraudDetector(
         transaction.forEachIndexed { index, eachTransaction ->
             transaction.drop(index).asSequence().filter {
                 it.dataTime <= eachTransaction.dataTime.plusHours(numOfHrSlidingWindow)
-            }.map { it.amount }.sum().takeIf{ it >= priceThreshold }?.let {
+            }.map { it.amount }.sum().takeIf { it >= priceThreshold }?.let {
                 return true
             }
         }
