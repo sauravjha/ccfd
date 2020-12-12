@@ -22,14 +22,13 @@ class CreditCardFraudDetector(
             println(fraudCardId)
         }
     }
-    @Suppress("ThrowsCount")
 
     fun isCardTransactionsFraud(transaction: List<Transaction>): Boolean {
         transaction.forEachIndexed { index, eachTransaction ->
-            transaction.drop(index).filter {
+            transaction.drop(index).asSequence().filter {
                 it.dataTime <= eachTransaction.dataTime.plusHours(numOfHrSlidingWindow)
-            }.map { it.amount }.sum().let {
-                if (it >= priceThreshold) return true
+            }.map { it.amount }.sum().takeIf{ it >= priceThreshold }?.let {
+                return true
             }
         }
         return false

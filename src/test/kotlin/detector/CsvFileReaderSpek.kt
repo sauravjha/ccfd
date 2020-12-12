@@ -73,7 +73,7 @@ object CsvFileReaderSpek : Spek({
                 }
             }
 
-            context("when the csvfile is invalid data") {
+            context("when the csvfile has invalid data") {
                 val basePath = "src/test/resources/invalid-csv"
                 val prefixMessage = "CSV file was invalid:"
                 listOf(

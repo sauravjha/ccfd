@@ -17,9 +17,9 @@ object CreditCardFraudDetectorSpek : Spek({
 
     describe("creditCardDetector") {
         val csvFileReader = CsvFileReader(File("dontcare"))
-
+        val priceThreshold = 150.0
         context("isTranactionFraud") {
-            val priceThreshold = 150.0
+
             val creditCardFraudDetector = CreditCardFraudDetector(csvFileReader, priceThreshold)
             context("when the transaction is not fraud for single slide window") {
 

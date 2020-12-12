@@ -12,6 +12,7 @@ import org.spekframework.spek2.style.specification.describe
 
 object UtilitySpek : Spek({
     describe("isAmountInValidFormat") {
+
         context("when amount is in valid format and dollar with 2 digit") {
             val result = "10.01".isAmountInValidFormat()
             it("returns same value") {
@@ -64,6 +65,7 @@ object UtilitySpek : Spek({
     }
 
     describe("isHashedStringValid") {
+
         context("when the valid size is 27") {
             val size = 27
             context("when the input is as expected") {
@@ -109,6 +111,7 @@ object UtilitySpek : Spek({
                 }
             }
         }
+
         context("when the valid size is 32") {
             val size = 32
             context("when the input is as expected") {
